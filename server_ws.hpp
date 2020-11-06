@@ -203,7 +203,7 @@ namespace SimpleWeb {
     public:
       /// fin_rsv_opcode: 129=one fragment, text, 130=one fragment, binary, 136=close connection.
       /// See http://tools.ietf.org/html/rfc6455#section-5.2 for more information.
-      void send(std::shared_ptr<OutMessage> out_message, std::function<void(const error_code &)> callback = nullptr, unsigned char fin_rsv_opcode = 129) {
+      void send(std::shared_ptr<OutMessage> out_message, std::function<void(const error_code &)> callback = nullptr, unsigned char fin_rsv_opcode = 130) {
         std::size_t length = out_message->size();
 
         auto out_header = std::make_shared<OutMessage>(10); // Header is at most 10 bytes
@@ -236,7 +236,7 @@ namespace SimpleWeb {
       /// Convenience function for sending a string.
       /// fin_rsv_opcode: 129=one fragment, text, 130=one fragment, binary, 136=close connection.
       /// See http://tools.ietf.org/html/rfc6455#section-5.2 for more information.
-      void send(string_view out_message_str, std::function<void(const error_code &)> callback = nullptr, unsigned char fin_rsv_opcode = 129) {
+      void send(string_view out_message_str, std::function<void(const error_code &)> callback = nullptr, unsigned char fin_rsv_opcode = 130) {
         auto out_message = std::make_shared<OutMessage>();
         out_message->write(out_message_str.data(), static_cast<std::streamsize>(out_message_str.size()));
         send(out_message, std::move(callback), fin_rsv_opcode);
